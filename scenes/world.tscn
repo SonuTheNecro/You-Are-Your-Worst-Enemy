@@ -121,6 +121,7 @@ texture_region_size = Vector2i(8, 8)
 6:0/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_fsuau"]
+tile_size = Vector2i(8, 8)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_714s2")
 
@@ -130,5 +131,6 @@ sources/0 = SubResource("TileSetAtlasSource_714s2")
 texture_filter = 1
 tile_set = SubResource("TileSet_fsuau")
 format = 2
+layer_0/tile_data = PackedInt32Array(0, 0, 1, 65536, 65536, 1, 1, 65536, 1, 65535, 65536, 1, 65533, 65536, 1, 65534, 65536, 1, 65532, 65536, 1, 2, 65536, 1)
 
 [node name="player" parent="." instance=ExtResource("2_r7etd")]
