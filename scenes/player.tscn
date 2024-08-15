@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://cbmn81obb0g15"]
+
+[ext_resource type="Texture2D" uid="uid://b1gfsngk2ch1p" path="res://art/player/223-2238311_mario-sprite-super-mario-bros-1-mario (1).png" id="1_0tsps"]
+[ext_resource type="Script" path="res://scripts/gd/player.gd" id="1_hcew7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hju85"]
+atlas = ExtResource("1_0tsps")
+region = Rect2(0, 0, 8, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0hb33"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hju85")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r3ihq"]
+radius = 4.0
+height = 10.0
+
+[node name="player" type="CharacterBody2D"]
+script = ExtResource("1_hcew7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -5)
+sprite_frames = SubResource("SpriteFrames_0hb33")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("CapsuleShape2D_r3ihq")
