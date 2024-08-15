@@ -129,6 +129,7 @@ sources/0 = SubResource("TileSetAtlasSource_714s2")
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
+scale = Vector2(3, 3)
 tile_set = SubResource("TileSet_fsuau")
 format = 2
 layer_0/tile_data = PackedInt32Array(0, 0, 1, 65536, 65536, 1, 1, 65536, 1, 65535, 65536, 1, 65533, 65536, 1, 65534, 65536, 1, 65532, 65536, 1, 2, 65536, 1)

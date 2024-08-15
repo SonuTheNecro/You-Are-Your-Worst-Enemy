@@ -18,6 +18,7 @@ func _physics_process(delta):
 		velocity = velocity.move_toward(speed * input_dir, acceleration) #Accerlate
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, friction)
+	jump()
 	move_and_slide()
 	
 # Gets the direction based on your input
@@ -32,7 +33,8 @@ func play_animations():
 		#$AnimatedSprite2D.flip_h = velocity.x > 0
 # Flip the animations and hitboxes
 func flip(value: bool):
-	$AnimatedSprite2D.flip_h = value
+	if value != $AnimatedSprite2D.flip_h:
+		$AnimatedSprite2D.flip_h = value
 func jump():
 	if Input.is_action_just_pressed("jump"):
 		if current_jumps < max_jumps:
