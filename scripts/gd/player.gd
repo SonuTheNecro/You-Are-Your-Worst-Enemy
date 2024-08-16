@@ -38,7 +38,6 @@ func flip(value: bool):
 func jump():
 	if Input.is_action_just_pressed("jump"):
 		if current_jumps < max_jumps:
-			$AudioStreamPlayer2D.play()
 			velocity.y = jump_power
 			current_jumps += 1
 		if is_on_floor():
