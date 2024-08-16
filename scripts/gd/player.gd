@@ -7,8 +7,10 @@ const jump_power : int = -2000
 
 const max_jumps : int = 1
 @onready var current_jumps : int = 0
+var checkpoint : int = 0
 
-func _physics_process(delta):
+
+func _physics_process(_delta):
 	var input_dir : Vector2 = input()
 	if not is_on_floor():
 		velocity.y += gravity
@@ -42,3 +44,10 @@ func jump():
 			current_jumps += 1
 		if is_on_floor():
 			current_jumps = 0
+
+func death():
+	print("you have died!")
+	pass
+
+func respawn():
+	pass
