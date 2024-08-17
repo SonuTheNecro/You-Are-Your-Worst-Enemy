@@ -1,9 +1,9 @@
 extends CharacterBody2D
 var gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
-const speed : int = 200
-const acceleration : int = 20
-const friction : int =  25
-const jump_power : int = -350
+const speed : int = 195
+const acceleration : int = 9
+const friction : int = 28
+const jump_power : int = -365
 
 #const max_jumps : int = 1
 #@onready var current_jumps : int = 0
@@ -17,7 +17,6 @@ var wall_slide_check : bool = false
 func _physics_process(delta):
 	input_dir = input()
 	wall_slide_check = self.is_on_wall() and not self.is_on_floor()
-	handle_gravity(delta)
 	if input_dir != Vector2.ZERO:
 		velocity.x = lerp(velocity.x, input_dir.x * speed, acceleration * delta)
 		#self.velocity = velocity.move_toward(speed * input_dir, acceleration) #Accerlate
@@ -29,6 +28,7 @@ func _physics_process(delta):
 	self.move_and_slide()
 	if coyote_check and not self.is_on_floor():
 		$Coyote_Timer.start()
+	play_animations()
 
 # Gets the direction based on your input
 func input() -> Vector2:
@@ -38,14 +38,16 @@ func input() -> Vector2:
 	
 func play_animations():
 	if abs(velocity.x) > 0.001:
-		flip(velocity.x > 0)
+		flip(velocity.x < 0)
 		#$AnimatedSprite2D.flip_h = velocity.x > 0
+
 # Flip the animations and hitboxes
 func flip(value: bool):
 	if value != $AnimatedSprite2D.flip_h:
 		$AnimatedSprite2D.flip_h = value
 #Handles Jumping
 func jump(delta):
+	handle_gravity(delta)
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or $Coyote_Timer.time_left > 0.0001):
 		self.velocity.y = jump_power
 		#self.velocity.y = lerp(self.velocity.y, float(jump_power), delta)
@@ -54,6 +56,8 @@ func jump(delta):
 		self.velocity.y = jump_power / 1.1
 		self.velocity.x = lerp(self.velocity.x, -(input_dir.x * (speed * 5)), acceleration * delta)
 		#self.velocity.x = -input_dir.x * speed / 1.1 
+	if Input.is_action_just_pressed("slide") and not is_on_floor():
+		velocity.y = jump_power / 1.8 * -1
 # Handles Gravity
 func handle_gravity(delta):
 	if not is_on_floor():  # Handles Gravity
