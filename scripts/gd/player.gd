@@ -16,6 +16,7 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 	else:
 		self.velocity.y = 0
+		coyote_check = false
 	if input_dir != Vector2.ZERO:
 		velocity.x = lerp(velocity.x, input_dir.x * speed, acceleration * delta)
 		#self.velocity = velocity.move_toward(speed * input_dir, acceleration) #Accerlate
@@ -43,7 +44,7 @@ func flip(value: bool):
 	if value != $AnimatedSprite2D.flip_h:
 		$AnimatedSprite2D.flip_h = value
 func jump():
-	if Input.is_action_just_pressed("jump") and (is_on_floor() or not $Coyote_Timer.is_stopped):
+	if Input.is_action_just_pressed("jump") and (is_on_floor() or $Coyote_Timer.time_left > 0.0001):
 		self.velocity.y = jump_power
 		#current_jumps += 1
 			
