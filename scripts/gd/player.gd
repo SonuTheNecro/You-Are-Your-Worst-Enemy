@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 var gravity : int = ProjectSettings.get_setting("physics/2d/default_gravity")
 const speed : int = 195
@@ -11,8 +12,14 @@ var input_dir : Vector2
 var checkpoint : int = 0
 var coyote_check : bool = false
 var wall_slide_check : bool = false
+var sliding_check : bool = false
+@onready var collision_shape = $CollisionShape2D
+#static var player
+#TODO: Turnaround delay
 
-
+func _ready():
+	#player = self
+	pass
 
 func _physics_process(delta):
 	input_dir = input()
@@ -28,6 +35,7 @@ func _physics_process(delta):
 	self.move_and_slide()
 	if coyote_check and not self.is_on_floor():
 		$Coyote_Timer.start()
+	slide(delta)
 	play_animations()
 
 # Gets the direction based on your input
@@ -55,9 +63,11 @@ func jump(delta):
 	elif Input.is_action_just_pressed("jump") and is_on_wall():
 		self.velocity.y = jump_power / 1.1
 		self.velocity.x = lerp(self.velocity.x, -(input_dir.x * (speed * 5)), acceleration * delta)
+		coyote_check = false
 		#self.velocity.x = -input_dir.x * speed / 1.1 
 	if Input.is_action_just_pressed("slide") and not is_on_floor():
 		velocity.y = jump_power / 1.8 * -1
+		coyote_check = false
 # Handles Gravity
 func handle_gravity(delta):
 	if wall_slide_check:
@@ -70,6 +80,28 @@ func handle_gravity(delta):
 		
 	if velocity.y > 600:
 		velocity.y = 600
+func slide(delta):
+	var tile = get_parent().get_node("Tiles/Grass")
+	if Input.is_action_just_pressed("slide") and is_on_floor():
+		#self.velocity.x = lerp(self.velocity.x, (input_dir.x * (speed * 2.5)), acceleration * delta)
+		self.velocity.x = input_dir.x * (speed * 2.5)
+		collision_shape.rotation_degrees = 90
+		collision_shape.position.y = -2
+		collision_shape.shape.set_radius(float(2))
+		collision_shape.shape.set_height(float(8))
+		sliding_check = true
+	if Input.is_action_just_released("slide") and is_on_floor() and tile.get_cell_tile_data(tile.local_to_map(tile.to_local(global_position))) != null:
+		collision_shape.rotation_degrees = 0
+		collision_shape.position.y = -5
+		collision_shape.shape.set_radius(float(3))
+		collision_shape.shape.set_height(float(10))
+		sliding_check = false
+	elif self.velocity.x == 0 and sliding_check and tile.get_cell_tile_data(tile.local_to_map(tile.to_local(global_position))) == null:
+		collision_shape.rotation_degrees = 0
+		collision_shape.position.y = -5
+		collision_shape.shape.set_radius(float(3))
+		collision_shape.shape.set_height(float(10))
+		sliding_check = false
 func death():
 	print("you have died!")
 	pass
