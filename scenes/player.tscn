@@ -40,3 +40,6 @@ zoom = Vector2(6, 6)
 [node name="Coyote_Timer" type="Timer" parent="."]
 wait_time = 0.15
 one_shot = true
+
+[node name="Slide_Timer" type="Timer" parent="."]
+one_shot = true

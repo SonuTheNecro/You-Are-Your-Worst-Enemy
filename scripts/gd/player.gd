@@ -67,6 +67,8 @@ func jump(delta):
 	if Input.is_action_just_pressed("slide") and not is_on_floor():
 		velocity.y = jump_power / 1.8 * -1
 		coyote_check = false
+	if Input.is_action_just_released("jump"):
+		self.velocity.y = 0
 # Handles Gravity
 func handle_gravity(delta):
 	if wall_slide_check:
@@ -82,12 +84,13 @@ func handle_gravity(delta):
 func slide():
 	var tile = get_parent().get_node("Tiles/Grass")
 	#print(tile.get_cell_tile_data(tile.local_to_map(tile.to_local(Vector2(global_position.x, global_position.y - 8)))),velocity.x)
-	if Input.is_action_just_pressed("slide") and is_on_floor():
+	if Input.is_action_just_pressed("slide") and is_on_floor() and $Slide_Timer.is_stopped():
 		self.velocity.x = input_dir.x * (speed * 2.5)
 		collision_shape.rotation_degrees = 90
 		collision_shape.position.y = -2
 		collision_shape.shape.set_radius(float(2))
 		collision_shape.shape.set_height(float(8))
+		$Slide_Timer.start()
 		
 	if Input.is_action_just_released("slide") and is_on_floor() and tile.get_cell_tile_data(tile.local_to_map(tile.to_local(Vector2(global_position.x, global_position.y - 8)))) != null:
 		collision_shape.rotation_degrees = 90
