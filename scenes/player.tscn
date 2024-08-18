@@ -42,4 +42,11 @@ wait_time = 0.15
 one_shot = true
 
 [node name="Slide_Timer" type="Timer" parent="."]
+wait_time = 0.55
 one_shot = true
+
+[node name="Death_Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="Death_Timer" to="." method="respawn"]

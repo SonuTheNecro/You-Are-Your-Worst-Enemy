@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=4 uid="uid://cqnbnceqyyexe"]
+[gd_scene load_steps=14 format=4 uid="uid://cqnbnceqyyexe"]
 
 [ext_resource type="Texture2D" uid="uid://xyfy12n4dhu" path="res://art/world/cavesofgallet_tiles.png" id="1_tqyli"]
 [ext_resource type="Script" path="res://scripts/gd/lava_death.gd" id="2_nnuve"]
 [ext_resource type="Script" path="res://scenes/lava.gd" id="2_oqi0w"]
 [ext_resource type="PackedScene" uid="uid://cbmn81obb0g15" path="res://scenes/player.tscn" id="2_r7etd"]
 [ext_resource type="Script" path="res://scenes/lava_check.gd" id="3_5rw76"]
+[ext_resource type="PackedScene" uid="uid://lp223gr5e3jl" path="res://checkpoint.tscn" id="5_2l45r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rxwsx"]
 texture = ExtResource("1_tqyli")
@@ -225,5 +226,8 @@ tile_set = SubResource("TileSet_fsuau")
 
 [node name="player" parent="." instance=ExtResource("2_r7etd")]
 position = Vector2(-60, 8)
+
+[node name="checkpoint" parent="." instance=ExtResource("5_2l45r")]
+position = Vector2(-32, 16)
 
 [connection signal="body_entered" from="Tiles/Lava/Area2D" to="Tiles/Lava/Area2D" method="player_check"]

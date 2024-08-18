@@ -12,6 +12,9 @@ var input_dir : Vector2
 var checkpoint : int = 0
 var coyote_check : bool = false
 var wall_slide_check : bool = false
+var camera_position : Vector2
+var last_checkpoint : Vector2 
+var death : bool = false
 @onready var collision_shape = $CollisionShape2D
 #static var player
 #TODO: Turnaround delay
@@ -21,6 +24,8 @@ func _ready():
 	pass
 
 func _physics_process(delta):
+	if death:
+		return
 	input_dir = input()
 	if input_dir != Vector2.ZERO:
 		velocity.x = lerp(velocity.x, input_dir.x * speed, acceleration * delta)
@@ -104,9 +109,19 @@ func slide():
 		collision_shape.shape.set_radius(float(3))
 		collision_shape.shape.set_height(float(10))
 		
-func death():
+func player_death():
 	print("you have died!")
-	pass
-
+	#camera_position = $Camera2D.global_position
+	death = true
+	$AnimatedSprite2D.visible = false
+	$CollisionShape2D.set_deferred("disabled", true)
+	$Death_Timer.start()
+	
+func store_checkpoint(found_checkpoint: Area2D):
+	last_checkpoint = found_checkpoint.global_position
+	print(last_checkpoint.x, " ", last_checkpoint.y)
 func respawn():
-	pass
+	self.position = last_checkpoint
+	$AnimatedSprite2D.visible = true
+	$CollisionShape2D.set_deferred("disabled", false)
+	death = false
