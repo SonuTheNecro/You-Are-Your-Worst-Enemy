@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c2neka6w1mock"]
+[gd_scene load_steps=8 format=3 uid="uid://lp223gr5e3jl"]
 
 [ext_resource type="Script" path="res://scripts/gd/checkpoint.gd" id="1_1yfvq"]
 [ext_resource type="Texture2D" uid="uid://c15p0ngrpnrrw" path="res://art/misc/checkpoint.png" id="2_gvhmw"]
@@ -29,7 +29,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"active",
-"speed": 4.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -51,6 +51,6 @@ shape = SubResource("RectangleShape2D_j4haf")
 texture_filter = 1
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_637c5")
-animation = &"active"
+animation = &"idle"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

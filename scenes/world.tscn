@@ -1,11 +1,12 @@
-[gd_scene load_steps=14 format=4 uid="uid://cqnbnceqyyexe"]
+[gd_scene load_steps=15 format=4 uid="uid://cqnbnceqyyexe"]
 
 [ext_resource type="Texture2D" uid="uid://xyfy12n4dhu" path="res://art/world/cavesofgallet_tiles.png" id="1_tqyli"]
 [ext_resource type="Script" path="res://scripts/gd/lava_death.gd" id="2_nnuve"]
 [ext_resource type="Script" path="res://scenes/lava.gd" id="2_oqi0w"]
 [ext_resource type="PackedScene" uid="uid://cbmn81obb0g15" path="res://scenes/player.tscn" id="2_r7etd"]
 [ext_resource type="Script" path="res://scenes/lava_check.gd" id="3_5rw76"]
-[ext_resource type="PackedScene" uid="uid://lp223gr5e3jl" path="res://checkpoint.tscn" id="5_2l45r"]
+[ext_resource type="PackedScene" uid="uid://b2rux8ch28rk5" path="res://scenes/checkpoint_master.tscn" id="6_wj447"]
+[ext_resource type="PackedScene" path="res://scenes/checkpoint.tscn" id="7_hanyr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rxwsx"]
 texture = ExtResource("1_tqyli")
@@ -212,7 +213,7 @@ script = ExtResource("2_oqi0w")
 script = ExtResource("2_nnuve")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tiles/Lava/Area2D"]
-position = Vector2(32, 8)
+position = Vector2(32, 32)
 shape = SubResource("RectangleShape2D_ipv6d")
 script = ExtResource("3_5rw76")
 
@@ -227,7 +228,14 @@ tile_set = SubResource("TileSet_fsuau")
 [node name="player" parent="." instance=ExtResource("2_r7etd")]
 position = Vector2(-60, 8)
 
-[node name="checkpoint" parent="." instance=ExtResource("5_2l45r")]
-position = Vector2(-32, 16)
+[node name="checkpoint_master" parent="." instance=ExtResource("6_wj447")]
+
+[node name="checkpoint1" parent="checkpoint_master" instance=ExtResource("7_hanyr")]
+position = Vector2(-40, 16)
+id = 1
+
+[node name="checkpoint2" parent="checkpoint_master" instance=ExtResource("7_hanyr")]
+position = Vector2(112, 16)
+id = 2
 
 [connection signal="body_entered" from="Tiles/Lava/Area2D" to="Tiles/Lava/Area2D" method="player_check"]

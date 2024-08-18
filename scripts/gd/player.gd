@@ -119,7 +119,7 @@ func player_death():
 	
 func store_checkpoint(found_checkpoint: Area2D):
 	last_checkpoint = found_checkpoint.global_position
-	print(last_checkpoint.x, " ", last_checkpoint.y)
+	#print(last_checkpoint.x, " ", last_checkpoint.y)
 func respawn():
 	self.position = last_checkpoint
 	$AnimatedSprite2D.visible = true
