@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=4 uid="uid://cqnbnceqyyexe"]
+[gd_scene load_steps=13 format=4 uid="uid://cqnbnceqyyexe"]
 
 [ext_resource type="Texture2D" uid="uid://xyfy12n4dhu" path="res://art/world/cavesofgallet_tiles.png" id="1_tqyli"]
 [ext_resource type="Script" path="res://scripts/gd/lava_death.gd" id="2_nnuve"]
+[ext_resource type="Script" path="res://scenes/lava.gd" id="2_oqi0w"]
 [ext_resource type="PackedScene" uid="uid://cbmn81obb0g15" path="res://scenes/player.tscn" id="2_r7etd"]
 [ext_resource type="Script" path="res://scenes/lava_check.gd" id="3_5rw76"]
 
@@ -42,11 +43,9 @@ texture = ExtResource("1_tqyli")
 texture_region_size = Vector2i(8, 8)
 4:7/0 = 0
 4:7/0/terrain_set = 0
-4:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
 4:8/0 = 0
 4:8/0/terrain_set = 0
 4:8/0/terrain = 0
-4:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
 4:8/0/terrains_peering_bit/right_side = 0
 4:8/0/terrains_peering_bit/bottom_right_corner = 0
 4:8/0/terrains_peering_bit/bottom_side = 0
@@ -57,14 +56,12 @@ texture_region_size = Vector2i(8, 8)
 4:8/0/terrains_peering_bit/top_right_corner = 0
 4:9/0 = 0
 4:9/0/terrain_set = 0
-4:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
 4:9/0/terrains_peering_bit/top_left_corner = 0
 4:9/0/terrains_peering_bit/top_side = 0
 4:9/0/terrains_peering_bit/top_right_corner = 0
 4:10/0 = 0
 4:10/0/terrain_set = 0
 4:10/0/terrain = 0
-4:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
 4:10/0/terrains_peering_bit/right_side = 0
 4:10/0/terrains_peering_bit/bottom_right_corner = 0
 4:10/0/terrains_peering_bit/bottom_side = 0
@@ -75,6 +72,7 @@ texture_region_size = Vector2i(8, 8)
 [sub_resource type="TileSet" id="TileSet_7n30a"]
 tile_size = Vector2i(8, 8)
 physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "lava"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
@@ -207,6 +205,7 @@ tile_set = SubResource("TileSet_8owc3")
 texture_filter = 1
 tile_map_data = PackedByteArray("AAAFAAUAAAAEAAgAAAAFAAQAAAAEAAgAAAAFAAMAAAAEAAgAAAAFAAIAAAAEAAoAAAAEAAUAAAAEAAgAAAAEAAQAAAAEAAgAAAAEAAMAAAAEAAgAAAAEAAIAAAAEAAoAAAADAAUAAAAEAAgAAAADAAQAAAAEAAgAAAADAAMAAAAEAAgAAAADAAIAAAAEAAoAAAACAAUAAAAEAAgAAAACAAQAAAAEAAgAAAACAAMAAAAEAAgAAAACAAIAAAAEAAoAAAABAAUAAAAEAAgAAAABAAQAAAAEAAgAAAABAAMAAAAEAAgAAAABAAIAAAAEAAoAAAABAAYAAAAEAAkAAAACAAYAAAAEAAkAAAADAAYAAAAEAAkAAAAEAAYAAAAEAAkAAAAFAAYAAAAEAAkAAAAGAAMAAAAEAAgAAAAGAAQAAAAEAAgAAAAGAAUAAAAEAAgAAAAGAAYAAAAEAAkAAAAGAAIAAAAEAAoAAAA=")
 tile_set = SubResource("TileSet_7n30a")
+script = ExtResource("2_oqi0w")
 
 [node name="Area2D" type="Area2D" parent="Tiles/Lava"]
 script = ExtResource("2_nnuve")
