@@ -16,7 +16,6 @@ var wall_slide_check : bool = false
 
 func _physics_process(delta):
 	input_dir = input()
-	wall_slide_check = self.is_on_wall() and not self.is_on_floor()
 	if input_dir != Vector2.ZERO:
 		velocity.x = lerp(velocity.x, input_dir.x * speed, acceleration * delta)
 		#self.velocity = velocity.move_toward(speed * input_dir, acceleration) #Accerlate
@@ -24,6 +23,7 @@ func _physics_process(delta):
 		velocity.x = lerp(velocity.x, 0.0, friction * delta)
 		#self.velocity = velocity.move_toward(Vector2.ZERO, friction)
 	jump(delta)
+	wall_slide_check = self.is_on_wall() and not self.is_on_floor() and velocity.y > 0
 	coyote_check = self.is_on_floor() if not Input.is_action_just_pressed("jump") else false
 	self.move_and_slide()
 	if coyote_check and not self.is_on_floor():
@@ -60,12 +60,16 @@ func jump(delta):
 		velocity.y = jump_power / 1.8 * -1
 # Handles Gravity
 func handle_gravity(delta):
-	if not is_on_floor():  # Handles Gravity
+	if wall_slide_check:
+		velocity.y += (gravity * 0.25) * delta
+	elif not is_on_floor():  # Handles Gravity
 		velocity.y += gravity * delta
 	else:
 		self.velocity.y = 0
 		coyote_check = false
-		wall_slide_check = false
+		
+	if velocity.y > 600:
+		velocity.y = 600
 func death():
 	print("you have died!")
 	pass

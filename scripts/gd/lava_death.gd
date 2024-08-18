@@ -9,5 +9,4 @@ func _physics_process(_delta):
 
 func player_check(body: Node2D):
 	if body.is_in_group("player"):
-		print("touched player")
 		body.death()

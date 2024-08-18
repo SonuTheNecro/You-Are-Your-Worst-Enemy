@@ -81,6 +81,7 @@ terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_8ldo6")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ipv6d"]
+size = Vector2(50, 24)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_714s2"]
 texture = ExtResource("1_tqyli")
@@ -211,7 +212,7 @@ tile_set = SubResource("TileSet_7n30a")
 script = ExtResource("2_nnuve")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tiles/Lava/Area2D"]
-position = Vector2(8, 0)
+position = Vector2(32, 8)
 shape = SubResource("RectangleShape2D_ipv6d")
 script = ExtResource("3_5rw76")
 
