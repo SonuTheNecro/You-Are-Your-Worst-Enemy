@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1gfsngk2ch1p"
-path="res://.godot/imported/223-2238311_mario-sprite-super-mario-bros-1-mario (1).png-e1595ddb75b522fb275feaf4ef87ddce.ctex"
+uid="uid://bppo3yxm3sbnj"
+path="res://.godot/imported/water_jug_man_death.png-634611e92cad94f9670aa57ddcba7b4f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/player/223-2238311_mario-sprite-super-mario-bros-1-mario (1).png"
-dest_files=["res://.godot/imported/223-2238311_mario-sprite-super-mario-bros-1-mario (1).png-e1595ddb75b522fb275feaf4ef87ddce.ctex"]
+source_file="res://art/player/water_jug_man_death.png"
+dest_files=["res://.godot/imported/water_jug_man_death.png-634611e92cad94f9670aa57ddcba7b4f.ctex"]
 
 [params]
 

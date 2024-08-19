@@ -13,6 +13,7 @@ var coyote_check : bool = false
 var wall_slide_check : bool = false
 var jump_buffer_check : bool = false
 var isSliding : bool = false
+var isWallSliding: bool = false
 var camera_position : Vector2
 var last_checkpoint : Vector2 
 var player_state : bool = false
@@ -26,6 +27,7 @@ func _ready():
 	$AnimatedSprite2D.play("idle")
 
 func _physics_process(delta):
+	
 	if Input.is_action_just_pressed("respawn"):
 		self.player_death()
 	if death:
@@ -54,7 +56,11 @@ func input() -> Vector2:
 	
 func play_animations():
 	var state_to_play : String = ""
-	if self.velocity.y != 0 and not self.is_on_floor():
+	if death:
+		state_to_play = "death"
+	elif isWallSliding:
+		state_to_play = "wall_slide"
+	elif self.velocity.y != 0 and not self.is_on_floor():
 		state_to_play = "jump" #if velocity.y < 0 #else "falling"
 	elif abs(self.velocity.x) < 0.1:
 		state_to_play = "idle"
@@ -102,11 +108,14 @@ func jump(delta):
 func handle_gravity(delta):
 	if wall_slide_check:
 		velocity.y += (gravity * 0.25) * delta
+		isWallSliding = true
 	elif not is_on_floor():  # Handles Gravity
 		velocity.y += gravity * delta
+		isWallSliding = false
 	else:
 		self.velocity.y = 0
 		coyote_check = false
+		isWallSliding = false
 		
 	if velocity.y > 600:
 		velocity.y = 600
@@ -141,7 +150,7 @@ func player_death():
 	#camera_position = $Camera2D.global_position
 	if not death:
 		death = true
-		$AnimatedSprite2D.visible = false
+		$AnimatedSprite2D.play("death")
 		$CollisionShape2D.set_deferred("disabled", true)
 		self.global_position = last_checkpoint
 		$Death_Timer.start()
