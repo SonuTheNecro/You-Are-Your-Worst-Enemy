@@ -12,8 +12,10 @@ var input_dir : Vector2
 var coyote_check : bool = false
 var wall_slide_check : bool = false
 var jump_buffer_check : bool = false
+var isSliding : bool = false
 var camera_position : Vector2
 var last_checkpoint : Vector2 
+var player_state : bool = false
 var death : bool = false
 @onready var collision_shape = $CollisionShape2D
 #static var player
@@ -21,7 +23,7 @@ var death : bool = false
 
 func _ready():
 	death = true
-	
+	$AnimatedSprite2D.play("idle")
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("respawn"):
@@ -51,6 +53,22 @@ func input() -> Vector2:
 	return input_dir
 	
 func play_animations():
+	var state_to_play : String = ""
+	if self.velocity.y != 0 and not self.is_on_floor():
+		state_to_play = "jump" #if velocity.y < 0 #else "falling"
+	elif abs(self.velocity.x) < 0.1:
+		state_to_play = "idle"
+	elif isSliding:
+		state_to_play = "slide"
+	elif abs(self.velocity.x) > 0.1 and self.is_on_floor():
+		state_to_play = "walk"
+	
+		
+	
+		
+	$AnimatedSprite2D.play(state_to_play)
+	
+	
 	if abs(velocity.x) > 0.001:
 		flip(velocity.x < 0)
 		#$AnimatedSprite2D.flip_h = velocity.x > 0
@@ -101,6 +119,7 @@ func slide():
 		collision_shape.position.y = -2
 		collision_shape.shape.set_radius(float(2))
 		collision_shape.shape.set_height(float(8))
+		isSliding = true
 		$Slide_Timer.start()
 		
 	if Input.is_action_just_released("slide") and is_on_floor() and tile.get_cell_tile_data(tile.local_to_map(tile.to_local(Vector2(global_position.x, global_position.y - 8)))) != null:
@@ -109,7 +128,9 @@ func slide():
 		collision_shape.shape.set_radius(float(2))
 		collision_shape.shape.set_height(float(8))
 		
-	if abs(self.velocity).is_zero_approx() and tile.get_cell_tile_data(tile.local_to_map(tile.to_local(Vector2(global_position.x, global_position.y - 8)))) == null:
+	if  abs(self.velocity.x) < 0.01 and tile.get_cell_tile_data(tile.local_to_map(tile.to_local(Vector2(global_position.x, global_position.y - 8)))) == null:
+		isSliding = false
+		#abs(self.velocity).is_zero_approx()
 		collision_shape.rotation_degrees = 0
 		collision_shape.position.y = -5
 		collision_shape.shape.set_radius(float(3))

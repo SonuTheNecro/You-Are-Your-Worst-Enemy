@@ -1,21 +1,81 @@
-[gd_scene load_steps=6 format=3 uid="uid://cbmn81obb0g15"]
+[gd_scene load_steps=15 format=3 uid="uid://cbmn81obb0g15"]
 
-[ext_resource type="Texture2D" uid="uid://b1gfsngk2ch1p" path="res://art/player/223-2238311_mario-sprite-super-mario-bros-1-mario (1).png" id="1_0tsps"]
 [ext_resource type="Script" path="res://scripts/gd/player.gd" id="1_hcew7"]
+[ext_resource type="Texture2D" uid="uid://btsu5vkoknx4" path="res://art/player/water_jug_man.png" id="2_61dg6"]
+[ext_resource type="Texture2D" uid="uid://dxliex22f4dfv" path="res://art/player/water_jug_man_idle.png" id="2_kda3w"]
+[ext_resource type="Texture2D" uid="uid://l7i82jg5umw0" path="res://art/player/water_jug_man_slide.png" id="3_aeno5"]
+[ext_resource type="Texture2D" uid="uid://di5u24qxvqmq7" path="res://art/player/water_jug_man_walk.png" id="5_nuqic"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hju85"]
-atlas = ExtResource("1_0tsps")
-region = Rect2(0, 0, 8, 10)
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxsok"]
+atlas = ExtResource("2_kda3w")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nv5rp"]
+atlas = ExtResource("2_kda3w")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_stivj"]
+atlas = ExtResource("3_aeno5")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s4in4"]
+atlas = ExtResource("2_61dg6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j63ey"]
+atlas = ExtResource("5_nuqic")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_im8hd"]
+atlas = ExtResource("5_nuqic")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qmyv1"]
+atlas = ExtResource("5_nuqic")
+region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0hb33"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hju85")
+"texture": SubResource("AtlasTexture_rxsok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nv5rp")
 }],
 "loop": true,
-"name": &"default",
+"name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_stivj")
+}],
+"loop": true,
+"name": &"slide",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s4in4")
+}],
+"loop": true,
+"name": &"stock",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j63ey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_im8hd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qmyv1")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r3ihq"]
@@ -27,8 +87,10 @@ script = ExtResource("1_hcew7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(0, -5)
+position = Vector2(0, -6.5)
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_0hb33")
+animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
@@ -36,6 +98,7 @@ shape = SubResource("CapsuleShape2D_r3ihq")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(6, 6)
+process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 
