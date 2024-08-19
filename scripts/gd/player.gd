@@ -20,8 +20,8 @@ var death : bool = false
 #TODO: Turnaround delay
 
 func _ready():
-	#player = self
-	pass
+	death = true
+	
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("respawn"):
