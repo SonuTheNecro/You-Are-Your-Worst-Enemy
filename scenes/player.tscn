@@ -49,4 +49,9 @@ one_shot = true
 wait_time = 3.0
 one_shot = true
 
+[node name="Jump_Buffer_Timer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+
 [connection signal="timeout" from="Death_Timer" to="." method="respawn"]
+[connection signal="timeout" from="Jump_Buffer_Timer" to="." method="jump_buffer_timer"]

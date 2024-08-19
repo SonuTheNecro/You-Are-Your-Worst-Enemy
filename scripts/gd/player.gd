@@ -9,9 +9,9 @@ const jump_power : int = -365
 #const max_jumps : int = 1
 #@onready var current_jumps : int = 0
 var input_dir : Vector2
-var checkpoint : int = 0
 var coyote_check : bool = false
 var wall_slide_check : bool = false
+var jump_buffer_check : bool = false
 var camera_position : Vector2
 var last_checkpoint : Vector2 
 var death : bool = false
@@ -60,15 +60,19 @@ func flip(value: bool):
 #Handles Jumping
 func jump(delta):
 	handle_gravity(delta)
-	if Input.is_action_just_pressed("jump") and (is_on_floor() or $Coyote_Timer.time_left > 0.0001):
+	if (jump_buffer_check or Input.is_action_just_pressed("jump")) and (is_on_floor() or $Coyote_Timer.time_left > 0.0001):
 		self.velocity.y = jump_power
+		disable_jumps_checks()
 		#self.velocity.y = lerp(self.velocity.y, float(jump_power), delta)
 		#current_jumps += 1
-	elif Input.is_action_just_pressed("jump") and is_on_wall():
+	elif (jump_buffer_check or Input.is_action_just_pressed("jump")) and is_on_wall():
 		self.velocity.y = jump_power / 1.1
 		self.velocity.x = lerp(self.velocity.x, -(input_dir.x * (speed * 5)), acceleration * delta)
-		coyote_check = false
-		#self.velocity.x = -input_dir.x * speed / 1.1 
+		disable_jumps_checks()
+		#self.velocity.x = -input_dir.x * speed / 1.1
+	elif Input.is_action_just_pressed("jump") and not is_on_wall() and not is_on_floor():
+		jump_buffer_check = true
+		$Jump_Buffer_Timer.start()
 	if Input.is_action_just_pressed("slide") and not is_on_floor():
 		velocity.y = jump_power / 1.8 * -1
 		coyote_check = false
@@ -125,3 +129,10 @@ func respawn():
 	$AnimatedSprite2D.visible = true
 	$CollisionShape2D.set_deferred("disabled", false)
 	death = false
+func jump_buffer_timer():
+	jump_buffer_check = false
+	
+func disable_jumps_checks():
+	jump_buffer_check = false
+	coyote_check = false
+	
