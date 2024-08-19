@@ -24,6 +24,8 @@ func _ready():
 	pass
 
 func _physics_process(delta):
+	if Input.is_action_just_pressed("respawn"):
+		self.player_death()
 	if death:
 		return
 	input_dir = input()
@@ -114,24 +116,24 @@ func slide():
 		collision_shape.shape.set_height(float(10))
 		
 func player_death():
-	print("you have died!")
+	#print("you have died!")
 	#camera_position = $Camera2D.global_position
-	death = true
-	$AnimatedSprite2D.visible = false
-	$CollisionShape2D.set_deferred("disabled", true)
-	$Death_Timer.start()
-	
+	if not death:
+		death = true
+		$AnimatedSprite2D.visible = false
+		$CollisionShape2D.set_deferred("disabled", true)
+		self.global_position = last_checkpoint
+		$Death_Timer.start()
 func store_checkpoint(found_checkpoint: Area2D):
 	last_checkpoint = found_checkpoint.global_position
 	#print(last_checkpoint.x, " ", last_checkpoint.y)
 func respawn():
-	self.position = last_checkpoint
+	$Camera2D.global_position = self.global_position
 	$AnimatedSprite2D.visible = true
 	$CollisionShape2D.set_deferred("disabled", false)
 	death = false
 func jump_buffer_timer():
 	jump_buffer_check = false
-	
 func disable_jumps_checks():
 	jump_buffer_check = false
 	coyote_check = false
