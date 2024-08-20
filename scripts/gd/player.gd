@@ -53,10 +53,10 @@ func play_animations():
 		state_to_play = "wall_slide"
 	elif self.velocity.y != 0 and not self.is_on_floor():
 		state_to_play = "jump" if velocity.y < 0 else "fall"
-	elif abs(self.velocity.x) > 0.1 and self.is_on_floor():
-		state_to_play = "walk"
 	elif isSliding:
 		state_to_play = "slide"
+	elif abs(self.velocity.x) > 0.1 and self.is_on_floor():
+		state_to_play = "walk"
 	elif abs(self.velocity.x) < 0.1:
 		state_to_play = "idle"
 	$AnimatedSprite2D.play(state_to_play)
@@ -101,7 +101,7 @@ func handle_gravity(delta):
 	if abs(velocity.x) > 300:
 		velocity.x = 300 if input_dir.x == 1 else -300
 func slide():
-	var tile = get_parent().get_node("Tiles/Grass")
+	var tile = get_parent().get_node("tiles/solid_tiles")
 	#print(tile.get_cell_tile_data(tile.local_to_map(tile.to_local(Vector2(global_position.x, global_position.y - 8)))),velocity.x)
 	if Input.is_action_just_pressed("slide") and is_on_floor() and $Slide_Timer.is_stopped():
 		self.velocity.x = input_dir.x * (speed * 2.5)

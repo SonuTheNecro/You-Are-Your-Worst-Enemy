@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cbmn81obb0g15"]
+[gd_scene load_steps=33 format=3 uid="uid://cbmn81obb0g15"]
 
 [ext_resource type="Script" path="res://scripts/gd/player.gd" id="1_hcew7"]
 [ext_resource type="Texture2D" uid="uid://btsu5vkoknx4" path="res://art/player/water_jug_man.png" id="2_61dg6"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dwukhkxgklge5" path="res://art/player/water_jug_man_jump.png" id="4_t00lw"]
 [ext_resource type="Texture2D" uid="uid://di5u24qxvqmq7" path="res://art/player/water_jug_man_walk.png" id="5_nuqic"]
 [ext_resource type="Texture2D" uid="uid://cybvdj7nf53yp" path="res://art/player/water_jug_man_wall_slide.png" id="7_6ghsy"]
+[ext_resource type="Script" path="res://scenes/camera_2d.gd" id="10_x10an"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3tete"]
 atlas = ExtResource("2_bo10j")
@@ -216,6 +217,7 @@ zoom = Vector2(6, 6)
 process_callback = 0
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
+script = ExtResource("10_x10an")
 
 [node name="Coyote_Timer" type="Timer" parent="."]
 wait_time = 0.15
