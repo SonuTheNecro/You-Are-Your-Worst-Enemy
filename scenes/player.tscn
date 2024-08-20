@@ -1,10 +1,12 @@
-[gd_scene load_steps=24 format=3 uid="uid://cbmn81obb0g15"]
+[gd_scene load_steps=32 format=3 uid="uid://cbmn81obb0g15"]
 
 [ext_resource type="Script" path="res://scripts/gd/player.gd" id="1_hcew7"]
 [ext_resource type="Texture2D" uid="uid://btsu5vkoknx4" path="res://art/player/water_jug_man.png" id="2_61dg6"]
 [ext_resource type="Texture2D" uid="uid://bppo3yxm3sbnj" path="res://art/player/water_jug_man_death.png" id="2_bo10j"]
 [ext_resource type="Texture2D" uid="uid://dxliex22f4dfv" path="res://art/player/water_jug_man_idle.png" id="2_kda3w"]
+[ext_resource type="Texture2D" uid="uid://cglxcjnmks1fy" path="res://art/player/water_jug_man_fall.png" id="3_7v8bm"]
 [ext_resource type="Texture2D" uid="uid://l7i82jg5umw0" path="res://art/player/water_jug_man_slide.png" id="3_aeno5"]
+[ext_resource type="Texture2D" uid="uid://dwukhkxgklge5" path="res://art/player/water_jug_man_jump.png" id="4_t00lw"]
 [ext_resource type="Texture2D" uid="uid://di5u24qxvqmq7" path="res://art/player/water_jug_man_walk.png" id="5_nuqic"]
 [ext_resource type="Texture2D" uid="uid://cybvdj7nf53yp" path="res://art/player/water_jug_man_wall_slide.png" id="7_6ghsy"]
 
@@ -24,6 +26,18 @@ region = Rect2(64, 0, 32, 32)
 atlas = ExtResource("2_bo10j")
 region = Rect2(96, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_3nj2i"]
+atlas = ExtResource("3_7v8bm")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vaano"]
+atlas = ExtResource("3_7v8bm")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mw2pg"]
+atlas = ExtResource("3_7v8bm")
+region = Rect2(64, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_rxsok"]
 atlas = ExtResource("2_kda3w")
 region = Rect2(0, 0, 32, 32)
@@ -31,6 +45,18 @@ region = Rect2(0, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_nv5rp"]
 atlas = ExtResource("2_kda3w")
 region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tceiu"]
+atlas = ExtResource("4_t00lw")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kc2fd"]
+atlas = ExtResource("4_t00lw")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mu2m0"]
+atlas = ExtResource("4_t00lw")
+region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_stivj"]
 atlas = ExtResource("3_aeno5")
@@ -85,6 +111,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_3nj2i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vaano")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mw2pg")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_rxsok")
 }, {
 "duration": 1.0,
@@ -92,7 +132,21 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tceiu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kc2fd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mu2m0")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -100,7 +154,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"slide",
-"speed": 5.0
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -122,7 +176,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
-"speed": 8.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -151,7 +205,7 @@ texture_filter = 1
 position = Vector2(0, -6.5)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_0hb33")
-animation = &"wall_slide"
+animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
