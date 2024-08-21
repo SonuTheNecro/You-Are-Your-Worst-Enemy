@@ -14,10 +14,11 @@ var isSliding : bool = false
 var isWallSliding: bool = false
 var camera_position : Vector2
 var last_checkpoint : Vector2 
-var player_state : bool = false
 var death : bool = false
 @onready var collision_shape = $CollisionShape2D
 
+var player_positions : Array[Vector2] = []
+var player_animations: Array[String]  = []
 func _ready():
 	death = true
 	$AnimatedSprite2D.play("idle")
@@ -27,6 +28,7 @@ func _physics_process(delta):
 		self.player_death()
 	if death:
 		return
+	
 	input_dir = input()
 	if input_dir != Vector2.ZERO:
 		velocity.x = lerp(velocity.x, input_dir.x * speed, acceleration * delta)
@@ -40,6 +42,8 @@ func _physics_process(delta):
 		$Coyote_Timer.start()
 	slide()
 	play_animations()
+	player_positions.push_back(self.global_position)
+	player_animations.push_back($AnimatedSprite2D.animation)
 # Gets the direction based on your input
 func input() -> Vector2:
 	input_dir = Vector2.ZERO
@@ -103,14 +107,13 @@ func handle_gravity(delta):
 func slide():
 	var tile = get_parent().get_node("tiles/solid_tiles")
 	#print(tile.get_cell_tile_data(tile.local_to_map(tile.to_local(Vector2(global_position.x, global_position.y - 8)))),velocity.x)
-	if Input.is_action_just_pressed("slide") and is_on_floor() and $Slide_Timer.is_stopped():
+	if Input.is_action_just_pressed("slide") and is_on_floor():
 		self.velocity.x = input_dir.x * (speed * 2.5)
 		collision_shape.rotation_degrees = 90
 		collision_shape.position.y = -2
 		collision_shape.shape.set_radius(float(2))
 		collision_shape.shape.set_height(float(8))
 		isSliding = true
-		$Slide_Timer.start()
 		
 	if Input.is_action_just_released("slide") and is_on_floor() and tile.get_cell_tile_data(tile.local_to_map(tile.to_local(Vector2(global_position.x, global_position.y - 8)))) != null:
 		collision_shape.rotation_degrees = 90
@@ -130,11 +133,11 @@ func player_death():
 		death = true
 		$AnimatedSprite2D.play("death")
 		$CollisionShape2D.set_deferred("disabled", true)
-		self.global_position = last_checkpoint
 		$Death_Timer.start()
 func store_checkpoint(found_checkpoint: Area2D):
 	last_checkpoint = found_checkpoint.global_position
 func respawn():
+	self.global_position = last_checkpoint
 	$Camera2D.global_position = self.global_position
 	$AnimatedSprite2D.visible = true
 	$CollisionShape2D.set_deferred("disabled", false)
@@ -145,3 +148,9 @@ func disable_jumps_checks():
 	jump_buffer_check = false
 	coyote_check = false
 	
+func get_player_position_array():
+	return player_positions
+func get_player_animation_array():
+	return player_animations
+func get_death_status():
+	return death
