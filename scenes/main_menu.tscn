@@ -20,7 +20,7 @@ offset_bottom = 101.0
 layout_mode = 2
 text = "Start"
 
-[node name="option_button" type="Button" parent="VBoxContainer"]
+[node name="Controls" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Options"
 

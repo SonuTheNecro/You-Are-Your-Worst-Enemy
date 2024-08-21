@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://oegq4dcfbpbi"]
+[gd_scene load_steps=16 format=4 uid="uid://oegq4dcfbpbi"]
 
 [ext_resource type="Texture2D" uid="uid://e84xfwemruw3" path="res://art/world/world_1.png" id="1_o2iyo"]
 [ext_resource type="Script" path="res://scripts/gd/lava_death.gd" id="2_pdmru"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b2rux8ch28rk5" path="res://scenes/checkpoint_master.tscn" id="3_awib7"]
 [ext_resource type="PackedScene" uid="uid://lp223gr5e3jl" path="res://scenes/checkpoint.tscn" id="4_gv04x"]
 [ext_resource type="PackedScene" uid="uid://brg4nh4w4p8f8" path="res://scenes/door.tscn" id="5_beguq"]
+[ext_resource type="PackedScene" uid="uid://ksvj8ncmsqw7" path="res://scenes/enemy.tscn" id="6_ktvtf"]
 [ext_resource type="Script" path="res://scripts/gd/complete_game.gd" id="7_xtc5i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5hmdv"]
@@ -480,11 +481,11 @@ tile_size = Vector2i(8, 8)
 physics_layer_0/collision_layer = 2
 sources/0 = SubResource("TileSetAtlasSource_uwl58")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_acmof"]
+size = Vector2(526.9, 140.5)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_csep8"]
 size = Vector2(1002.5, 45)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_acmof"]
-size = Vector2(738, 133)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d30xk"]
 size = Vector2(54, 200)
@@ -503,6 +504,11 @@ tile_set = SubResource("TileSet_4lndo")
 
 [node name="Area2D" type="Area2D" parent="tiles/lava"]
 script = ExtResource("2_pdmru")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="tiles/lava/Area2D"]
+position = Vector2(1827.55, 632.75)
+shape = SubResource("RectangleShape2D_acmof")
+debug_color = Color(0.3187, 0.608858, 0.410895, 0.42)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="tiles/lava/Area2D"]
 position = Vector2(2946.75, 129.5)
@@ -543,6 +549,20 @@ script = ExtResource("7_xtc5i")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="complete_game"]
 position = Vector2(1527, 436)
 shape = SubResource("RectangleShape2D_d30xk")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 1406.0
+offset_top = 396.0
+offset_right = 1534.0
+offset_bottom = 523.0
+text = "You won!
+
+
+SonuTN's record
+00:37:527"
+horizontal_alignment = 1
+
+[node name="enemy" parent="." instance=ExtResource("6_ktvtf")]
 
 [connection signal="body_entered" from="tiles/lava/Area2D" to="tiles/lava/Area2D" method="player_check"]
 [connection signal="body_entered" from="complete_game" to="complete_game" method="_on_body_entered"]
