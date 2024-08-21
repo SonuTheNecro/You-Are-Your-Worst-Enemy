@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cao8bpj2t2lg3"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_right = 23.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 0
+text = "00:"
+
+[node name="Label2" type="Label" parent="Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Label3" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 8.0
+offset_right = 95.0
+offset_bottom = 31.0

@@ -1,6 +1,7 @@
-[gd_scene load_steps=25 format=3 uid="uid://ksvj8ncmsqw7"]
+[gd_scene load_steps=30 format=3 uid="uid://ksvj8ncmsqw7"]
 
 [ext_resource type="Script" path="res://scripts/gd/enemy.gd" id="1_sds3w"]
+[ext_resource type="Texture2D" uid="uid://no573b40iuix" path="res://art/enemy/lava_jug_man_death.png" id="2_77qci"]
 [ext_resource type="Texture2D" uid="uid://d0i1riqr1vyf1" path="res://art/enemy/lava_jug_man_fall.png" id="2_l5euj"]
 [ext_resource type="Texture2D" uid="uid://dfhih84612hwt" path="res://art/enemy/lava_jug_man_idle.png" id="3_uy014"]
 [ext_resource type="Texture2D" uid="uid://bwxll2sv1y1n2" path="res://art/enemy/lava_juice_man_jump.png" id="4_aa8vq"]
@@ -10,6 +11,22 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mtgw3"]
 size = Vector2(9, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbobo"]
+atlas = ExtResource("2_77qci")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1a68o"]
+atlas = ExtResource("2_77qci")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x4xu3"]
+atlas = ExtResource("2_77qci")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ett7q"]
+atlas = ExtResource("2_77qci")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kcrs2"]
 atlas = ExtResource("2_l5euj")
@@ -73,6 +90,23 @@ region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jxriw"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hbobo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1a68o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x4xu3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ett7q")
+}],
+"loop": true,
+"name": &"death",
+"speed": 4.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kcrs2")
