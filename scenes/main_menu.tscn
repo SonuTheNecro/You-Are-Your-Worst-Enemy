@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://da51siwmltkoo"]
+[gd_scene load_steps=3 format=3 uid="uid://da51siwmltkoo"]
 
 [ext_resource type="Script" path="res://scripts/gd/main_menu.gd" id="1_dwuc8"]
+[ext_resource type="Texture2D" uid="uid://bxipew16jemj7" path="res://art/misc/main_menu.png" id="2_lc8xs"]
 
 [node name="main_menu" type="Control"]
 layout_mode = 3
@@ -11,18 +12,30 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dwuc8")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_lc8xs")
+centered = false
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 70.0
-offset_bottom = 101.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.084
+anchor_top = 0.646
+anchor_right = 0.084
+anchor_bottom = 0.646
+offset_left = -3.28001
+offset_top = -3.68005
+offset_right = 167.72
+offset_bottom = 97.3199
+scale = Vector2(3.4, 3.4)
 
 [node name="start_button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Start"
 
-[node name="Controls" type="Button" parent="VBoxContainer"]
+[node name="controls_button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Options"
+text = "Controls"
 
 [node name="quit_button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
