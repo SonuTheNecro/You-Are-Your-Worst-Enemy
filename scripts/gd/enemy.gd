@@ -46,12 +46,7 @@ func _on_spawn_timer_timeout():
 
 func active_switch(value: bool):
 	$AnimatedSprite2D.play("death" if value == false else "idle")
-	#$Area2D/CollisionShape2D.set_deferred("disabled", !(active))
 	if value:
-		#player_pos.clear()
-		#player_animation.clear()
-		#array_pos = 0
-		get_parent().get_node("player").player_clear()
 		$Area2D/CollisionShape2D.set_deferred("disabled", true)
 		$Spawn_Timer.start()
 		$AnimatedSprite2D.visible = true
