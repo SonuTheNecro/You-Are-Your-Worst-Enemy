@@ -15,6 +15,7 @@ var isWallSliding: bool = false
 var camera_position : Vector2
 var last_checkpoint : Vector2 
 var death : bool = false
+var enemy_spawned : bool = false
 @onready var collision_shape = $CollisionShape2D
 
 var player_positions : Array[Vector2] = []
@@ -42,8 +43,9 @@ func _physics_process(delta):
 		$Coyote_Timer.start()
 	slide()
 	play_animations()
-	player_positions.push_back(self.global_position)
-	player_animations.push_back($AnimatedSprite2D.animation)
+	if (enemy_spawned):
+		player_positions.push_back(self.global_position)
+		player_animations.push_back($AnimatedSprite2D.animation)
 # Gets the direction based on your input
 func input() -> Vector2:
 	input_dir = Vector2.ZERO
@@ -154,3 +156,6 @@ func get_player_animation_array():
 	return player_animations
 func get_death_status():
 	return death
+func player_clear():
+	player_positions.clear()
+	player_animations.clear()

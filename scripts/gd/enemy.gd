@@ -5,17 +5,19 @@ var player
 var array_pos : int = 0
 var last_position : Vector2
 var state : bool = true
-var active : bool = true
+var active : bool = false
+var temp_active : bool = false
 func _ready():
-	self.global_position.x = 0
-	self.global_position.y = 0
+	self.global_position.x = -100
+	self.global_position.y = -100
 	$AnimatedSprite2D.play("idle")
-
+	$AnimatedSprite2D.visible = false
+	$Area2D/CollisionShape2D.set_deferred("disabled", false)
 func _physics_process(_delta):
 	if active:
 		last_position = self.global_position
 		player = get_parent().get_node("player")
-		if player != null:
+		if player != null and state == false:
 			if player.get_death_status():
 				state = true
 		if player != null and $Spawn_Timer.is_stopped() and state:
@@ -42,6 +44,16 @@ func _on_area_2d_body_entered(body):
 func _on_spawn_timer_timeout():
 	$Area2D/CollisionShape2D.set_deferred("disabled", false)
 
-func active_switch():
-	$AnimatedSprite2D.play("death")
-	active = false
+func active_switch(value: bool):
+	$AnimatedSprite2D.play("death" if value == false else "idle")
+	#$Area2D/CollisionShape2D.set_deferred("disabled", !(active))
+	if value:
+		#player_pos.clear()
+		#player_animation.clear()
+		#array_pos = 0
+		get_parent().get_node("player").player_clear()
+		$Area2D/CollisionShape2D.set_deferred("disabled", true)
+		$Spawn_Timer.start()
+		$AnimatedSprite2D.visible = true
+	self.active = value
+		
