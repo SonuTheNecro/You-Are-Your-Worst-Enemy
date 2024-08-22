@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://da51siwmltkoo"]
+[gd_scene load_steps=4 format=3 uid="uid://da51siwmltkoo"]
 
 [ext_resource type="Script" path="res://scripts/gd/main_menu.gd" id="1_dwuc8"]
 [ext_resource type="Texture2D" uid="uid://bxipew16jemj7" path="res://art/misc/main_menu.png" id="2_lc8xs"]
+[ext_resource type="FontFile" uid="uid://b1u8a7c7ei4wd" path="res://fonts/VT323-Regular.ttf" id="3_g2itt"]
 
 [node name="main_menu" type="Control"]
 layout_mode = 3
@@ -25,20 +26,28 @@ anchor_right = 0.084
 anchor_bottom = 0.646
 offset_left = -3.28001
 offset_top = -3.68005
-offset_right = 167.72
-offset_bottom = 97.3199
-scale = Vector2(3.4, 3.4)
+offset_right = 176.72
+offset_bottom = 104.32
+scale = Vector2(3.2, 3.2)
 
 [node name="start_button" type="Button" parent="VBoxContainer"]
+texture_filter = 1
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_g2itt")
+theme_override_font_sizes/font_size = 24
 text = "Start"
 
 [node name="controls_button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_g2itt")
+theme_override_font_sizes/font_size = 24
 text = "Controls"
 
 [node name="quit_button" type="Button" parent="VBoxContainer"]
+texture_filter = 1
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_g2itt")
+theme_override_font_sizes/font_size = 24
 text = "Quit"
 
 [connection signal="pressed" from="VBoxContainer/start_button" to="." method="_on_start_button_pressed"]
