@@ -28,6 +28,10 @@ func _ready():
 func _physics_process(delta):
 	if Input.is_action_just_pressed("respawn"):
 		self.player_death()
+	if Input.is_action_just_pressed("reset_game"):
+		if level_id == 0:
+			get_tree().change_scene_to_file("res://scenes/controls.tscn")
+		get_tree().change_scene_to_file("res://scenes/world_%d.tscn" % level_id)
 	if death:
 		return
 	
@@ -90,7 +94,10 @@ func jump(delta):
 		velocity.y = jump_power / 1.8 * -1
 		coyote_check = false
 	if Input.is_action_just_released("jump"):
-		self.velocity.y = 0
+		if velocity.y > 25:
+				velocity.y = 25
+		elif velocity.y < 0:
+			self.velocity.y = 0
 # Handles Gravity
 func handle_gravity(delta):
 	if wall_slide_check:
