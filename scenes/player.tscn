@@ -1,6 +1,6 @@
-[gd_scene load_steps=35 format=3 uid="uid://cbmn81obb0g15"]
+[gd_scene load_steps=37 format=3 uid="uid://cbmn81obb0g15"]
 
-[ext_resource type="Script" path="res://scripts/gd/player.gd" id="1_hcew7"]
+[ext_resource type="Script" path="res://scripts/gd/player/player.gd" id="1_hcew7"]
 [ext_resource type="Texture2D" uid="uid://btsu5vkoknx4" path="res://art/player/water_jug_man.png" id="2_61dg6"]
 [ext_resource type="Texture2D" uid="uid://bppo3yxm3sbnj" path="res://art/player/water_jug_man_death.png" id="2_bo10j"]
 [ext_resource type="Texture2D" uid="uid://dxliex22f4dfv" path="res://art/player/water_jug_man_idle.png" id="2_kda3w"]
@@ -9,9 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://dwukhkxgklge5" path="res://art/player/water_jug_man_jump.png" id="4_t00lw"]
 [ext_resource type="Texture2D" uid="uid://di5u24qxvqmq7" path="res://art/player/water_jug_man_walk.png" id="5_nuqic"]
 [ext_resource type="Texture2D" uid="uid://cybvdj7nf53yp" path="res://art/player/water_jug_man_wall_slide.png" id="7_6ghsy"]
-[ext_resource type="Script" path="res://scenes/camera_2d.gd" id="10_x10an"]
-[ext_resource type="Script" path="res://scripts/gd/panel.gd" id="11_r3xs6"]
+[ext_resource type="Script" path="res://scripts/gd/player/camera_2d.gd" id="10_x10an"]
+[ext_resource type="Script" path="res://scripts/gd/player/panel.gd" id="11_r3xs6"]
 [ext_resource type="FontFile" uid="uid://b1u8a7c7ei4wd" path="res://fonts/VT323-Regular.ttf" id="11_wuv2e"]
+[ext_resource type="Script" path="res://scripts/gd/player/audio_stream_player_2d.gd" id="13_ecff1"]
+[ext_resource type="AudioStream" uid="uid://dglgmc74pmk8m" path="res://audio/player/jump.wav" id="13_rscer"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3tete"]
 atlas = ExtResource("2_bo10j")
@@ -274,6 +276,11 @@ one_shot = true
 [node name="Jump_Buffer_Timer" type="Timer" parent="."]
 wait_time = 0.048
 one_shot = true
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_rscer")
+volume_db = -9.226
+script = ExtResource("13_ecff1")
 
 [connection signal="timeout" from="Death_Timer" to="." method="respawn"]
 [connection signal="timeout" from="Jump_Buffer_Timer" to="." method="jump_buffer_timer"]

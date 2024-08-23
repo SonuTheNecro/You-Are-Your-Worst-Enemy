@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=4 uid="uid://bxcpyku06hrot"]
 
-[ext_resource type="Script" path="res://scripts/gd/controls.gd" id="1_j6us7"]
+[ext_resource type="Script" path="res://scripts/gd/world/controls.gd" id="1_j6us7"]
 [ext_resource type="PackedScene" uid="uid://cbmn81obb0g15" path="res://scenes/player.tscn" id="1_xlfnc"]
 [ext_resource type="Texture2D" uid="uid://bqf1pj8an3up5" path="res://art/misc/controls.png" id="2_i25ss"]
 [ext_resource type="Texture2D" uid="uid://e84xfwemruw3" path="res://art/world/world_1.png" id="3_c588a"]
@@ -25,6 +25,7 @@ scale = Vector2(2.028, 2)
 texture = ExtResource("2_i25ss")
 
 [node name="player" parent="." instance=ExtResource("1_xlfnc")]
+script = null
 
 [node name="tiles" type="Node2D" parent="."]
 

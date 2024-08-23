@@ -83,9 +83,11 @@ func jump(delta):
 	if (jump_buffer_check or Input.is_action_just_pressed("jump")) and (is_on_floor() or $Coyote_Timer.time_left > 0.0001):
 		self.velocity.y = jump_power
 		disable_jumps_checks()
+		$Jump.play()
 	elif (jump_buffer_check or Input.is_action_just_pressed("jump")) and is_on_wall():
 		self.velocity.y = jump_power / 1.1
 		self.velocity.x = lerp(self.velocity.x, -(input_dir.x * (speed * 5)), acceleration * delta)
+		$Jump.play()
 		disable_jumps_checks()
 	elif Input.is_action_just_pressed("jump") and not is_on_wall() and not is_on_floor():
 		jump_buffer_check = true

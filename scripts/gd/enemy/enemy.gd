@@ -51,4 +51,5 @@ func active_switch(value: bool):
 		$Spawn_Timer.start()
 		$AnimatedSprite2D.visible = true
 	self.active = value
-		
+	if not active:
+		$Area2D/CollisionShape2D.set_deferred("disabled", true)

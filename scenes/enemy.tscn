@@ -1,6 +1,6 @@
 [gd_scene load_steps=30 format=3 uid="uid://ksvj8ncmsqw7"]
 
-[ext_resource type="Script" path="res://scripts/gd/enemy.gd" id="1_sds3w"]
+[ext_resource type="Script" path="res://scripts/gd/enemy/enemy.gd" id="1_sds3w"]
 [ext_resource type="Texture2D" uid="uid://no573b40iuix" path="res://art/enemy/lava_jug_man_death.png" id="2_77qci"]
 [ext_resource type="Texture2D" uid="uid://d0i1riqr1vyf1" path="res://art/enemy/lava_jug_man_fall.png" id="2_l5euj"]
 [ext_resource type="Texture2D" uid="uid://dfhih84612hwt" path="res://art/enemy/lava_jug_man_idle.png" id="3_uy014"]

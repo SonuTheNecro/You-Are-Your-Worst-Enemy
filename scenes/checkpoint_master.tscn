@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b2rux8ch28rk5"]
 
-[ext_resource type="Script" path="res://scripts/gd/checkpoint_master.gd" id="1_2xhjh"]
+[ext_resource type="Script" path="res://scripts/gd/world/checkpoint_master.gd" id="1_2xhjh"]
 
 [node name="checkpoint_master" type="Node2D"]
 script = ExtResource("1_2xhjh")

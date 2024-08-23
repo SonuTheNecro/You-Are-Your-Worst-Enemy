@@ -1,10 +1,10 @@
 [gd_scene load_steps=16 format=4 uid="uid://cqnbnceqyyexe"]
 
 [ext_resource type="Texture2D" uid="uid://bpueycxavchny" path="res://art/world/cavesofgallet_tiles.png" id="1_tqyli"]
-[ext_resource type="Script" path="res://scripts/gd/lava_death.gd" id="2_nnuve"]
-[ext_resource type="Script" path="res://scenes/lava.gd" id="2_oqi0w"]
+[ext_resource type="Script" path="res://scripts/gd/world/lava_death.gd" id="2_nnuve"]
+[ext_resource type="Script" path="res://scripts/gd/world/lava.gd" id="2_oqi0w"]
 [ext_resource type="PackedScene" uid="uid://cbmn81obb0g15" path="res://scenes/player.tscn" id="2_r7etd"]
-[ext_resource type="Script" path="res://scenes/lava_check.gd" id="3_5rw76"]
+[ext_resource type="Script" path="res://scripts/gd/world/lava_check.gd" id="3_5rw76"]
 [ext_resource type="PackedScene" uid="uid://b2rux8ch28rk5" path="res://scenes/checkpoint_master.tscn" id="6_wj447"]
 [ext_resource type="PackedScene" uid="uid://lp223gr5e3jl" path="res://scenes/checkpoint.tscn" id="7_hanyr"]
 [ext_resource type="PackedScene" uid="uid://brg4nh4w4p8f8" path="res://scenes/door.tscn" id="8_oylpt"]
