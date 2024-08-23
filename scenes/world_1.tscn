@@ -526,6 +526,7 @@ debug_color = Color(0.3187, 0.608858, 0.410895, 0.42)
 
 [node name="player" parent="." instance=ExtResource("2_qnqtn")]
 position = Vector2(1, 2)
+level_id = 1
 
 [node name="checkpoint_master" parent="." instance=ExtResource("3_awib7")]
 

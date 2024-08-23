@@ -17,11 +17,12 @@ var last_checkpoint : Vector2
 var death : bool = false
 var enemy_spawned : bool = false
 @onready var collision_shape = $CollisionShape2D
-
+@export var level_id : int
 var player_positions : Array[Vector2] = []
 var player_animations: Array[String]  = []
 func _ready():
-	death = true
+	if level_id != 0:
+		death = true
 	$AnimatedSprite2D.play("idle")
 
 func _physics_process(delta):
@@ -108,6 +109,8 @@ func handle_gravity(delta):
 		velocity.x = 300 if input_dir.x == 1 else -300
 func slide():
 	var tile = get_parent().get_node("tiles/solid_tiles")
+	if tile == null:
+		return
 	#print(tile.get_cell_tile_data(tile.local_to_map(tile.to_local(Vector2(global_position.x, global_position.y - 8)))),velocity.x)
 	if Input.is_action_just_pressed("slide") and is_on_floor():
 		self.velocity.x = input_dir.x * (speed * 2.5)
