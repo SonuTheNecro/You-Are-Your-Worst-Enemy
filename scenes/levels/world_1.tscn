@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=4 uid="uid://bc6en40vnx05a"]
+[gd_scene load_steps=21 format=4 uid="uid://bc6en40vnx05a"]
 
 [ext_resource type="Texture2D" uid="uid://e84xfwemruw3" path="res://art/world/world_1.png" id="1_o2iyo"]
+[ext_resource type="Script" path="res://scripts/gd/world/world.gd" id="1_ri6du"]
 [ext_resource type="Script" path="res://scripts/gd/world/lava_death.gd" id="2_pdmru"]
 [ext_resource type="PackedScene" uid="uid://cbmn81obb0g15" path="res://scenes/player.tscn" id="2_qnqtn"]
 [ext_resource type="PackedScene" uid="uid://b2rux8ch28rk5" path="res://scenes/checkpoint_master.tscn" id="3_awib7"]
@@ -10,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/gd/enemy/complete_game.gd" id="7_xtc5i"]
 [ext_resource type="PackedScene" uid="uid://cxfuej1jd1kwv" path="res://scenes/parallax_background.tscn" id="9_vpp3b"]
 [ext_resource type="Script" path="res://scripts/gd/enemy/activate_enemy.gd" id="10_l3vwk"]
+[ext_resource type="PackedScene" uid="uid://do46qgsdpo71" path="res://scenes/pause_menu.tscn" id="12_rrdny"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5hmdv"]
 texture = ExtResource("1_o2iyo")
@@ -505,6 +507,7 @@ size = Vector2(54, 200)
 size = Vector2(20, 332)
 
 [node name="world_1" type="Node2D"]
+script = ExtResource("1_ri6du")
 
 [node name="tiles" type="Node" parent="."]
 
@@ -587,6 +590,8 @@ script = ExtResource("10_l3vwk")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="activate_enemy"]
 position = Vector2(454, -163)
 shape = SubResource("RectangleShape2D_uj6dq")
+
+[node name="Pause_Menu" parent="." instance=ExtResource("12_rrdny")]
 
 [connection signal="body_entered" from="tiles/lava/Area2D" to="tiles/lava/Area2D" method="player_check"]
 [connection signal="body_entered" from="complete_game" to="complete_game" method="_on_body_entered"]
