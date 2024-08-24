@@ -33,12 +33,16 @@ scale = Vector2(3.2, 3.2)
 [node name="start_button" type="Button" parent="VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
+focus_neighbor_top = NodePath("../quit_button")
+focus_neighbor_bottom = NodePath("../controls_button")
 theme_override_fonts/font = ExtResource("3_g2itt")
 theme_override_font_sizes/font_size = 24
 text = "Start"
 
 [node name="controls_button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../start_button")
+focus_neighbor_bottom = NodePath("../quit_button")
 theme_override_fonts/font = ExtResource("3_g2itt")
 theme_override_font_sizes/font_size = 24
 text = "Controls"
@@ -46,6 +50,8 @@ text = "Controls"
 [node name="quit_button" type="Button" parent="VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
+focus_neighbor_top = NodePath("../controls_button")
+focus_neighbor_bottom = NodePath("../start_button")
 theme_override_fonts/font = ExtResource("3_g2itt")
 theme_override_font_sizes/font_size = 24
 text = "Quit"

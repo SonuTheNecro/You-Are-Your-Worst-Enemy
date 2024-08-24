@@ -180,3 +180,5 @@ func get_player_animation_array():
 	return player_animations
 func get_death_status():
 	return death
+func get_level_id():
+	return level_id
