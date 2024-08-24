@@ -7,12 +7,14 @@ var last_position : Vector2
 var state : bool = true
 var active : bool = false
 var temp_active : bool = false
+@export var wait_time : float
 func _ready():
 	self.global_position.x = -100
 	self.global_position.y = -100
 	$AnimatedSprite2D.play("idle")
 	$AnimatedSprite2D.visible = false
 	$Area2D/CollisionShape2D.set_deferred("disabled", false)
+	$Spawn_Timer.wait_time = wait_time
 func _physics_process(_delta):
 	if active:
 		last_position = self.global_position

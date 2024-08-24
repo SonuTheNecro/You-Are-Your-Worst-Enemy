@@ -12,6 +12,7 @@ var wall_slide_check : bool = false
 var jump_buffer_check : bool = false
 var isSliding : bool = false
 var isWallSliding: bool = false
+var justLanded : bool = false
 var camera_position : Vector2
 var last_checkpoint : Vector2 
 var death : bool = false
@@ -83,11 +84,11 @@ func jump(delta):
 	if (jump_buffer_check or Input.is_action_just_pressed("jump")) and (is_on_floor() or $Coyote_Timer.time_left > 0.0001):
 		self.velocity.y = jump_power
 		disable_jumps_checks()
-		$Jump.play()
+		$Audio/Jump.play()
 	elif (jump_buffer_check or Input.is_action_just_pressed("jump")) and is_on_wall():
 		self.velocity.y = jump_power / 1.1
 		self.velocity.x = lerp(self.velocity.x, -(input_dir.x * (speed * 5)), acceleration * delta)
-		$Jump.play()
+		$Audio/Jump.play()
 		disable_jumps_checks()
 	elif Input.is_action_just_pressed("jump") and not is_on_wall() and not is_on_floor():
 		jump_buffer_check = true
@@ -105,11 +106,21 @@ func handle_gravity(delta):
 	if wall_slide_check:
 		velocity.y += (gravity * 0.25) * delta
 		isWallSliding = true
+		if not $Audio/Wall_Slide.is_playing():
+			$Audio/Wall_Slide.play()
 	elif not is_on_floor():  # Handles Gravity
+		$Audio/Wall_Slide.stop()
 		velocity.y += gravity * delta
 		isWallSliding = false
 	else:
-		self.velocity.y = 0
+		$Audio/Wall_Slide.stop()
+		#print(velocity.y , " ", justLanded)
+		if velocity.y != 0:
+			self.velocity.y = 0
+			justLanded = true
+		if justLanded:
+			$Audio/Land.play()
+			justLanded = false
 		coyote_check = false
 		isWallSliding = false
 	if velocity.y > 600:
@@ -128,6 +139,7 @@ func slide():
 		collision_shape.shape.set_radius(float(2))
 		collision_shape.shape.set_height(float(8))
 		isSliding = true
+		$Audio/Slide.play()
 		
 	if Input.is_action_just_released("slide") and is_on_floor() and tile.get_cell_tile_data(tile.local_to_map(tile.to_local(Vector2(global_position.x, global_position.y - 8)))) != null:
 		collision_shape.rotation_degrees = 90
@@ -146,6 +158,7 @@ func player_death():
 	if not death:
 		death = true
 		$AnimatedSprite2D.play("death")
+		$Audio/Death.play()
 		$CollisionShape2D.set_deferred("disabled", true)
 		$Death_Timer.start()
 func store_checkpoint(found_checkpoint: Area2D):
@@ -161,7 +174,6 @@ func jump_buffer_timer():
 func disable_jumps_checks():
 	jump_buffer_check = false
 	coyote_check = false
-	
 func get_player_position_array():
 	return player_positions
 func get_player_animation_array():

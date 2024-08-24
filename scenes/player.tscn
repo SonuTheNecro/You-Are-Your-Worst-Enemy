@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://cbmn81obb0g15"]
+[gd_scene load_steps=41 format=3 uid="uid://cbmn81obb0g15"]
 
 [ext_resource type="Script" path="res://scripts/gd/player/player.gd" id="1_hcew7"]
 [ext_resource type="Texture2D" uid="uid://btsu5vkoknx4" path="res://art/player/water_jug_man.png" id="2_61dg6"]
@@ -13,7 +13,11 @@
 [ext_resource type="Script" path="res://scripts/gd/player/panel.gd" id="11_r3xs6"]
 [ext_resource type="FontFile" uid="uid://b1u8a7c7ei4wd" path="res://fonts/VT323-Regular.ttf" id="11_wuv2e"]
 [ext_resource type="Script" path="res://scripts/gd/player/audio_stream_player_2d.gd" id="13_ecff1"]
+[ext_resource type="AudioStream" uid="uid://cr5tmtg2r37t4" path="res://audio/player/slide.ogg" id="13_ps8dx"]
 [ext_resource type="AudioStream" uid="uid://dglgmc74pmk8m" path="res://audio/player/jump.wav" id="13_rscer"]
+[ext_resource type="AudioStream" uid="uid://hx2ww7ukmryq" path="res://audio/player/land.ogg" id="14_no3ko"]
+[ext_resource type="AudioStream" uid="uid://bhlrcii1eqywt" path="res://audio/player/wall_slide.ogg" id="17_b1toe"]
+[ext_resource type="AudioStream" uid="uid://bs568wwfget3s" path="res://audio/player/death.ogg" id="18_4paxf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3tete"]
 atlas = ExtResource("2_bo10j")
@@ -277,10 +281,30 @@ one_shot = true
 wait_time = 0.048
 one_shot = true
 
-[node name="Jump" type="AudioStreamPlayer2D" parent="."]
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="Slide" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("13_ps8dx")
+volume_db = -20.0
+max_polyphony = 4
+
+[node name="Land" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("14_no3ko")
+volume_db = -30.026
+script = ExtResource("13_ecff1")
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("13_rscer")
 volume_db = -9.226
 script = ExtResource("13_ecff1")
+
+[node name="Wall_Slide" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("17_b1toe")
+volume_db = -10.0
+
+[node name="Death" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("18_4paxf")
+volume_db = -8.0
 
 [connection signal="timeout" from="Death_Timer" to="." method="respawn"]
 [connection signal="timeout" from="Jump_Buffer_Timer" to="." method="jump_buffer_timer"]
