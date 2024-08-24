@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dko3emjwad8qx"]
+
+[ext_resource type="AudioStream" uid="uid://lkgah22j4jky" path="res://audio/menus/click.ogg" id="1_ntogs"]
+[ext_resource type="Script" path="res://scripts/gd/misc/main_menu_button_sfx.gd" id="1_y6555"]
+
+[node name="main_menu_button_sfx" type="Node2D"]
+script = ExtResource("1_y6555")
+
+[node name="main_menu_click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_ntogs")

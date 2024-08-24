@@ -25,7 +25,6 @@ scale = Vector2(2.028, 2)
 texture = ExtResource("2_i25ss")
 
 [node name="player" parent="." instance=ExtResource("1_xlfnc")]
-script = null
 
 [node name="tiles" type="Node2D" parent="."]
 

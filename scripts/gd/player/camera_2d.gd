@@ -6,7 +6,8 @@ func _ready():
 	
 	
 func set_camera_limit():
-	match get_parent().get_level_id():
+	var level_id = self.get_parent().get_level_id()
+	match level_id:
 		0:
 			self.limit_left = -63
 			self.limit_bottom = 90
