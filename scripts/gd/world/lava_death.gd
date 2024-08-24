@@ -8,6 +8,7 @@ func _physics_process(_delta):
 	
 
 func player_check(body: Node2D):
-	print("death")
+	#print("death")
 	if body.is_in_group("player"):
-		body.player_death()
+		#body.player_death()
+		get_parent().get_parent().get_parent().get_node("enemy").player_death(body)

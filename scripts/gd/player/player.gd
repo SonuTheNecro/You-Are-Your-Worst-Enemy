@@ -27,6 +27,9 @@ func _ready():
 	$AnimatedSprite2D.play("idle")
 
 func _physics_process(delta):
+	if Input.is_action_just_pressed("pause"):
+		Engine.time_scale = 0 if Engine.time_scale == 1 else 1
+		
 	if Input.is_action_just_pressed("respawn"):
 		self.player_death()
 	if Input.is_action_just_pressed("reset_game"):

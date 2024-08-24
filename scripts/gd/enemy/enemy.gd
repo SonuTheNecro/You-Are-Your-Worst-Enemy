@@ -30,17 +30,18 @@ func _physics_process(_delta):
 				$AnimatedSprite2D.play(player_animation[array_pos])
 				$AnimatedSprite2D.flip_h = false if self.global_position.x - player.global_position.x < 0 else true
 				array_pos += 1
-
+func player_death(body):
+	player_pos.clear()
+	player_animation.clear()
+	body.player_death()
+	state = false
+	array_pos = 0
+	$Area2D/CollisionShape2D.set_deferred("disabled", true)
+	$Spawn_Timer.start()
 
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("player"):
-		player_pos.clear()
-		player_animation.clear()
-		body.player_death()
-		state = false
-		array_pos = 0
-		$Area2D/CollisionShape2D.set_deferred("disabled", true)
-		$Spawn_Timer.start()
+		self.player_death(body)
 		
 
 func _on_spawn_timer_timeout():
