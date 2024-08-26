@@ -7,6 +7,7 @@ var last_position : Vector2
 var state : bool = true
 var active : bool = false
 var temp_active : bool = false
+@onready var level = get_parent()
 @export var wait_time : float
 func _ready():
 	self.global_position.x = -100
@@ -16,7 +17,7 @@ func _ready():
 	$Area2D/CollisionShape2D.set_deferred("disabled", false)
 	$Spawn_Timer.wait_time = wait_time
 func _physics_process(_delta):
-	if active:
+	if active and not level.paused:
 		last_position = self.global_position
 		player = get_parent().get_node("player")
 		if player != null and state == false:

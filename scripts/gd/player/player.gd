@@ -17,6 +17,7 @@ var camera_position : Vector2
 var last_checkpoint : Vector2 
 var death : bool = false
 var enemy_spawned : bool = false
+@onready var level = get_parent()
 @onready var collision_shape = $CollisionShape2D
 @export var level_id : int
 var player_positions : Array[Vector2] = []
@@ -49,7 +50,7 @@ func _physics_process(delta):
 		$Coyote_Timer.start()
 	slide()
 	play_animations()
-	if (enemy_spawned):
+	if enemy_spawned and not level.paused:
 		player_positions.push_back(self.global_position)
 		player_animations.push_back($AnimatedSprite2D.animation)
 # Gets the direction based on your input
