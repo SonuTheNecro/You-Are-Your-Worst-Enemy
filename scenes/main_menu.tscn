@@ -73,3 +73,4 @@ rounded = true
 [connection signal="pressed" from="VBoxContainer/start_button" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/controls_button" to="." method="_on_controls_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/quit_button" to="." method="_on_quit_button_pressed"]
+[connection signal="value_changed" from="HScrollBar" to="." method="_on_h_scroll_bar_value_changed"]
