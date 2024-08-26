@@ -56,6 +56,20 @@ theme_override_fonts/font = ExtResource("3_g2itt")
 theme_override_font_sizes/font_size = 24
 text = "Quit"
 
+[node name="HScrollBar" type="HScrollBar" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.204
+anchor_bottom = 0.089
+offset_left = 738.0
+offset_top = 695.0
+offset_right = 737.32
+offset_bottom = 701.88
+min_value = 1.0
+max_value = 2.0
+value = 1.0
+rounded = true
+
 [connection signal="pressed" from="VBoxContainer/start_button" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/controls_button" to="." method="_on_controls_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/quit_button" to="." method="_on_quit_button_pressed"]

@@ -1,4 +1,5 @@
 extends Control
+var go_to_level : int = 1
 
 func _ready():
 	$VBoxContainer/start_button.grab_focus()
