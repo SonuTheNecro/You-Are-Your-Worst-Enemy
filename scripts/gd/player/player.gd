@@ -32,8 +32,9 @@ func _physics_process(delta):
 		self.player_death()
 	if Input.is_action_just_pressed("reset_game"):
 		if level_id == 0:
-			get_tree().change_scene_to_file("res://scenes/controls.tscn")
-		get_tree().change_scene_to_file("res://scenes/world_%d.tscn" % level_id)
+			get_tree().change_scene_to_file("res://scenes/levels/controls.tscn")
+		else:
+			get_tree().change_scene_to_file("res://scenes/levels/world_%d.tscn" % level_id)
 	if death:
 		return
 	
